@@ -204,17 +204,6 @@ Run the notebook cells from top to bottom to:
 
 The outputs can be used by analysts and planners to review the highest-priority zones for enforcement.
 
-## API Documentation
-
-This repository is primarily notebook-based and does not currently expose a formal REST API.
-
-The main "interfaces" are the generated outputs:
-
-- ranked hotspot tables,
-- congestion-impact summaries,
-- trend-based alert outputs,
-- CSV exports for reporting.
-
 
 ## Security Considerations
 
