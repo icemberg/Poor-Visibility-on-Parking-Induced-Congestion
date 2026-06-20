@@ -204,6 +204,10 @@ Run the notebook cells from top to bottom to:
 
 The outputs can be used by analysts and planners to review the highest-priority zones for enforcement.
 
+## Output: 
+
+- Zip file: `https://drive.google.com/file/d/1gfo-5vGtiHa1URSSDkfEECUigBySKr-S/view?usp=sharing`
+
 
 ## Security Considerations
 
