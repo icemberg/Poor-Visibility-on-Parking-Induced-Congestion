@@ -172,6 +172,32 @@ Three formulas in sequence:
 - **Formula:** `CCS = ΔT × λ × severity_sum × growth_multiplier × criticality_multiplier` (all min-max normalized)
 - **Output:** A weekly-refreshed priority dispatch table — cluster, ΔT, peak-hour λ, dominant violation type, vehicle type mix, road class, CCS rank
 
+### Stage 7 (Phase 7) — Forecasting (Next-Week Prediction)
+- **Input:** Historical weekly CCS scores, violation volumes, and growth trends for each cluster.
+- **Process:** An XGBoost model trained to predict the likely escalation or de-escalation of a hotspot's severity.
+- **Output:** Risk band forecasts (Critical, High Risk, Moderate, Low Risk) for proactive enforcement planning.
+
+### Stage 8 (Phase 8) — Prescriptive Enforcement Engine
+- **Input:** CCS Rankings, forecasts, and cluster geometries.
+- **Process:** Translates the analytical scores into actionable resource allocations. It cross-references peak violation hours with hotspot locations.
+- **Output:** Specific patrol allocations, tow-truck readiness alerts, recommended enforcement time-windows, and zone prioritization sheets.
+
+### Layer A — Emerging Hotspot Detection (Trend-Acceleration)
+- **Process:** Applies an Isolation Forest anomaly detection model to historical violation frequencies. Compares the second half of the data window with the first half to generate a "Resurgence Score".
+- **Purpose:** Identifies small but rapidly growing hotspots that static volume-based counting would completely miss (e.g., a cluster growing at +182% but with low absolute volume).
+
+### Layer B — Mappls / MapMyIndia Integration (Validation & Enrichment)
+- **Process:** Interacts with Mappls APIs (Reverse Geocoding, Routing, ETA, Distance Matrix).
+- **Purpose:** Enhances OSMnx fallback data with high-quality Indian road geometries. Provides independent travel time and distance estimates for synthetic corridors to validate the BPR-derived congestion delay model.
+
+### Layer C — Novel Feature Engineering
+- **Process:** Computes multi-dimensional features such as Rate of Penetration (ROP), Total Violation Severity (TVS), Validation Discrepancy Index (VDI), and overall Resurgence Score.
+- **Purpose:** Feeds non-linear, robust metrics into the CCS formula and forecasting models, moving beyond simple linear counts.
+
+### Layer D — Chronic Offender Analytics
+- **Process:** Aggregates repeat `vehicle_number` appearances, tracks unique hotspots per offender, and identifies the dominant vehicle type for repeat offenders.
+- **Purpose:** Pinpoints structural violators (e.g., commercial delivery fleets or specific private vehicles) rather than opportunistic one-time offenders, enabling targeted fines or interventions.
+
 ---
 
 ## 6. System Architecture
@@ -347,6 +373,8 @@ Mappls runs live signal-timing data across 125 smart junctions in Bengaluru, ena
 - **Google Colab Notebook (Full Pipeline):** [Open in Colab](https://colab.research.google.com/drive/1RrixBTPX5oEji9EeJxo1piiFwVp5Rfwz?usp=drive_link)
 - **Precomputed Outputs (ZIP):** [Download from Google Drive](https://drive.google.com/file/d/1gfo-5vGtiHa1URSSDkfEECUigBySKr-S/view?usp=drive_link)
 
+> **Note on GitHub Rendering ("Unable to render rich display"):** If you encounter this error when viewing `AI_Parking_violation.ipynb` directly on GitHub, it is due to GitHub's file size limits for notebooks containing rich outputs (like interactive Folium maps and plots). Please use the **Google Colab link** above to interact with the full notebook seamlessly.
+
 ---
 
 ## 14. Installation & Setup
@@ -392,11 +420,7 @@ The Streamlit dashboard (`app.py`) provides:
 
 ### Dashboard Preview
 
-![Dashboard Executive View](file:///C:/Users/ASUS/.gemini/antigravity-ide/brain/8757ff5a-387e-45a6-9ebe-6ab594560a50/media__1781973531643.png)
-
-![Dashboard Hotspot Details](file:///C:/Users/ASUS/.gemini/antigravity-ide/brain/8757ff5a-387e-45a6-9ebe-6ab594560a50/media__1781974269613.png)
-
-![Dashboard Interactive Map](file:///C:/Users/ASUS/.gemini/antigravity-ide/brain/8757ff5a-387e-45a6-9ebe-6ab594560a50/media__1781975515378.png)
+*(Please refer to the precomputed outputs zip file in the Google Drive link above for high-resolution dashboard screenshots, as GitHub's markdown renderer does not support absolute file paths for embedded media).*
 
 ### Sidebar Controls
 - Data source toggle (precomputed outputs vs. live CSV upload)
