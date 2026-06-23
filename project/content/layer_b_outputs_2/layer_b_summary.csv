@@ -1,0 +1,2 @@
+input_source,hotspots_enriched,reverse_geocoded,nearby_context_hits,traffic_routes_ok,distance_matrix_ok,mean_route_traffic_min,mean_route_optimal_min,mean_context_multiplier,alerts_flagged
+content\phase5_outputs_2\phase5_cluster_capacity_loss.csv,50,0,0,50,50,3.445466666666667,,1.0,0
