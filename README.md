@@ -370,10 +370,13 @@ Mappls runs live signal-timing data across 125 smart junctions in Bengaluru, ena
 
 ## 13. Important Links & Artifacts
 
-- **Google Colab Notebook (Full Pipeline):** [Open in Colab](https://colab.research.google.com/drive/1RrixBTPX5oEji9EeJxo1piiFwVp5Rfwz?usp=drive_link)
-- **Precomputed Outputs (ZIP):** [Download from Google Drive](https://drive.google.com/file/d/1gfo-5vGtiHa1URSSDkfEECUigBySKr-S/view?usp=drive_link)
+The following Google Colab environments were utilized extensively for the initial prototyping, experimentation, and validation of the analytical pipeline prior to modularizing the codebase into the final project structure:
+- **Prototyping & Experimentation Notebook 1:** [Open in Colab](https://colab.research.google.com/drive/1RrixBTPX5oEji9EeJxo1piiFwVp5Rfwz?usp=sharing)
+- **Prototyping & Experimentation Notebook 2:** [Open in Colab](https://colab.research.google.com/drive/1VkSPtGG594MvinwyGhWDapx0w8yUnSma?usp=sharing)
 
-> **Note on GitHub Rendering ("Unable to render rich display"):** If you encounter this error when viewing `AI_Parking_violation.ipynb` directly on GitHub, it is due to GitHub's file size limits for notebooks containing rich outputs (like interactive Folium maps and plots). Please use the **Google Colab link** above to interact with the full notebook seamlessly.
+- **Precomputed Outputs (ZIP):** [Download from Google Drive](https://drive.google.com/file/d/13Vrbzn3izmld8PuEiBO_jaLhX2iTY5TK/view?usp=sharing)
+
+> **Note on GitHub Rendering ("Unable to render rich display"):** If you encounter this error when viewing `AI_Parking_violation.ipynb` directly on GitHub, it is due to GitHub's file size limits for notebooks containing rich outputs (like interactive Folium maps and plots). Please use the **Google Colab links** above to interact with the full notebooks seamlessly.
 
 ---
 
@@ -385,32 +388,46 @@ Mappls runs live signal-timing data across 125 smart junctions in Bengaluru, ena
    cd Flipkart_Hackathon
    ```
 
-2. **Create and activate environment:**
+2. **Download the Dataset:**
+   Ensure the HackerEarth dataset (`jan to may police violation_anonymized791b166.csv`) is downloaded and placed in the **current working directory** before executing any scripts or notebooks.
+
+3. **Create and activate environment:**
    ```bash
    conda create -n parking python=3.12
    conda activate parking
    ```
 
-3. **Install dependencies:**
+4. **Install dependencies:**
    ```bash
    pip install pandas numpy matplotlib jupyter osmnx networkx streamlit folium streamlit-folium
    ```
 
-4. **Run the notebook pipeline:**
+5. **Execute the Pipeline (Two Options):**
+
+   **Option A: Run the Notebook**
+   You can run the entire pipeline interactively through the Jupyter Notebook:
    ```bash
    jupyter notebook AI_Parking_violation.ipynb
    ```
 
-5. **Launch the dashboard:**
+   **Option B: Run the Python Scripts (Project Folder)**
+   Alternatively, you can run all the modular Python files located in the `project/` folder. The exact required order of execution is:
+   `phase1` → `phase2` → `phase3` → `phase4` → `phase5` → `layera` → `layerb` → `layerc` → `layerd` → `phase6` → `phase7` → `phase8` → `validation_layer`
+   → `dashboard.py`
+   > **Note on Phase 5:** Stage 5 (using OSMnx) will take **200+ minutes** to complete because of the heavy betweenness, centrality computations across the 798 spatial clusters.
+   > 
+   > **Note on Outputs:** The outputs of each file are stored in the `content` folder inside the `project/` directory. If the generated output files exceed GitHub's file size limits, a ZIP file link will be provided in this README later.
+
+6. **Launch the dashboard:**
    ```bash
-   streamlit run app.py
+   streamlit run project/dashboard.py
    ```
 
 ---
 
 ## 15. Dashboard Usage
 
-The Streamlit dashboard (`app.py`) provides:
+The Streamlit dashboard (`project/app1_phase8_updated.py`) provides:
 
 - **Executive View** — Priority ranking table with CCS scores, risk bands, and filters
 - **Interactive Map** — Folium-based map with hotspot markers, heatmap layer, and click-to-select
@@ -420,7 +437,12 @@ The Streamlit dashboard (`app.py`) provides:
 
 ### Dashboard Preview
 
-*(Please refer to the precomputed outputs zip file in the Google Drive link above for high-resolution dashboard screenshots, as GitHub's markdown renderer does not support absolute file paths for embedded media).*
+![Dashboard Executive View](dashboard_outputs/screencapture-localhost-8501-2026-06-23-13_33_13.png)
+
+![Dashboard Hotspot Details](dashboard_outputs/screencapture-localhost-8501-2026-06-23-13_33_33.png)
+
+![Dashboard Forecasting](dashboard_outputs/screencapture-localhost-8501-2026-06-23-13_34_46.png)
+*(Please refer to other screenshots in the `dashboard_outputs/` folder of the repository).*
 
 ### Sidebar Controls
 - Data source toggle (precomputed outputs vs. live CSV upload)
