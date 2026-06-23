@@ -1,1 +1,2 @@
-
+input_source,validated_hotspots,partially_validated_hotspots,not_validated_hotspots,mean_route_eta_min,mean_distance_matrix_eta_min,mean_model_delay_min,mean_corridor_congestion_ratio_route,mean_corridor_congestion_ratio_matrix,mean_delay_pct_of_freeflow
+content\phase6_outputs_2\phase6_stage6_handoff.csv,20,0,0,3.5828333333333324,3.5828333333333324,60.0,3.5828333333333324,3.5828333333333324,12000.0
