@@ -1,1 +1,2 @@
-
+phase7_source,phase6_source,records_source,offenders_source,hotspots_forecasted,hotspots_allocated,total_patrol_units_requested,total_patrol_units_allocated,tow_required_hotspots,critical_hotspots,high_hotspots,zone_count,route_stops,mean_priority_score,mean_escalation_probability
+content\phase7_outputs_2\phase7_next_week_forecast_ranked.csv,content\phase6_outputs_2\phase6_cluster_ccs_full.csv,content\phase5_outputs_2\phase5_enriched_records.csv,content\phase6_outputs_2\phase6_chronic_offender_list.csv,798,15,15,15,0,0,4,798,12,11.95668843364518,0.30410285942286014
