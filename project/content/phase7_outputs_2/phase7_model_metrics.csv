@@ -1,0 +1,14 @@
+metric,value
+backend,xgboost
+train_rows,719
+validation_rows,91
+target_raw_min_train,0.8317766166719344
+target_raw_max_train,63.61645581874103
+regression_rmse_raw,7.6603908880668765
+regression_mae_raw,3.8690635005306047
+regression_r2_raw,0.8078332102680527
+escalation_auc,0.9990338164251207
+escalation_average_precision,0.9990648755178378
+escalation_accuracy,0.978021978021978
+escalation_f1,0.9777777777777777
+escalation_brier_score,0.02333462315111153
